@@ -10,7 +10,9 @@ import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.LinkedHashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Getter
 @ToString
@@ -36,6 +38,10 @@ public class Article {
     @Setter
     @Column(nullable = true, length = 100)
     private String hashtag;
+
+    @OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
+    @ToString.Exclude
+    private final Set<ArticleComment> articleComments = new LinkedHashSet<>();
 
     @CreatedDate
     @Column(nullable = false)

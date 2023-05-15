@@ -13,7 +13,7 @@ logging:
 
 spring:
   datasource:
-    url: jdbc://mariadb://my.yoyang.io:3307/springboard
+    url: jdbc:mariadb://my.yoyang.io:3307/springboard
     username: springboard
     password: Testpassword1!
     driver-class-name: org.mariadb.jdbc.Driver
