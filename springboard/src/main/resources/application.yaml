@@ -28,6 +28,11 @@ spring:
 
   h2.console.enabled: true
   sql.init.mode: always
+  data.rest:
+    base-path: /api
+    # https://docs.spring.io/spring-data/rest/docs/current/reference/html/#getting-started.setting-repository-detection-strategy
+    detection-strategy: annotated
+
 
 
 ---
