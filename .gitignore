@@ -1,5 +1,6 @@
 # Created by https://www.toptal.com/developers/gitignore/api/macos,java,intellij+all
 # Edit at https://www.toptal.com/developers/gitignore?templates=macos,java,intellij+all
+.gitignore~
 
 ### Intellij+all ###
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio, WebStorm and Rider
@@ -11,6 +12,9 @@
 .idea/**/usage.statistics.xml
 .idea/**/dictionaries
 .idea/**/shelf
+
+# Querydsl
+src/main/generated
 
 # AWS User-specific
 .idea/**/aws.xml
