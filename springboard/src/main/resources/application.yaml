@@ -12,6 +12,8 @@ logging:
     org.hibernate.type.descriptor.sql: trace
 
 spring:
+  thymeleaf:
+    cache: false
   datasource:
     url: jdbc:mariadb://my.yoyang.io:3307/springboard
     username: springboard
