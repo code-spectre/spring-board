@@ -1,4 +1,4 @@
-package controller;
+package com.example.springboard.controller;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
@@ -9,11 +9,10 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 // 모든 controller를 테스트 할 필요는 없으므로
-@WebMvcTest(ArticleControllerTest.class)
+@WebMvcTest(ArticleController.class)
 @DisplayName("View 컨트롤러 - 게시글")
 class ArticleControllerTest {
     private final MockMvc mvc;
@@ -24,7 +23,6 @@ class ArticleControllerTest {
     }
 
 
-    @Disabled("구현 예정")
     @DisplayName("[view] GET 게시글 리스트 호출 - 정상호출")
     @Test
     public void givenNothing_whenRequestingArticlesView_thenReturnsArticlesView() throws Exception {
@@ -32,7 +30,7 @@ class ArticleControllerTest {
         // when
         mvc.perform(get("/articles"))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.TEXT_HTML))
+                .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_HTML))
                 .andExpect(view().name("articles/index"))
                 .andExpect(model().attributeExists("articles"));
         // then
