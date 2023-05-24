@@ -1,3 +1,5 @@
+insert into user_account (user_id, user_password, nickname, email, memo, created_at, created_by, updated_at, updated_by) values
+    ('pleed', 'testpassword1!', 'testnick', 'test@email.com', 'Hello', now(), 'uno', now(), 'uno');
 -- 123 게시글
 insert into article (title, content, hashtag, created_by, updated_by, created_at, updated_at)
 values ('Quisque ut erat.', 'Vestibulum quam sapien, varius ut, blandit non, interdum in, ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio. Curabitur convallis.
