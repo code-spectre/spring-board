@@ -2,4 +2,7 @@
 <thlogic>
     <attr sel="#header" th:replace="header :: header"/>
     <attr sel="#footer" th:replace="footer :: footer"/>
+    <attr sel="#bootstrap-viewport" th:replace="index :: #bootstrap-viewport"/>
+    <attr sel="#bootstrap-link" th:replace="index :: #bootstrap-link"/>
+    <attr sel="#boostrap-script" th:replace="index :: #bootstrap-script"/>
 </thlogic>
