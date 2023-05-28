@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta id="bootstrap-viewport">
+    <link id="bootstrap-link">
+    <title>게시글 페이지</title>
+</head>
+<body>
+<header id="header"></header>
+<main class="container">
+    <header class="py-5 text-center">
+        <h1>첫번째 글</h1>
+    </header>
+    <div class="row g-5">
+        <section class="col-md-5 col-lg-4 order-md-last">
+            <aside>
+                <p><span class="nick-name">pleed</span></p>
+                <p><a class="u-url" rel="me" href="mailto:pleed@naver.com">pleed</a></p>
+                <p>
+                    <time datetime="2023-05-23T00:00:00">2023-05-23</time>
+                </p>
+                <p><span class="nick-name">pleed</span></p>
+                <p>#java</p>
+            </aside>
+        </section>
+        <article class="col-md-7 col-lg-8">
+            <p>본문<br/><br/></p>
+        </article>
+    </div>
+
+    <div class="row g-5">
+        <section>
+            <form class="row g-3">
+                <div class="col-8">
+                    <label for="comment" hidden>댓글쓰기</label>
+                    <textarea class="form-control" id="comment" placeholder="댓글쓰기.." rows="3"></textarea>
+                </div>
+                <div class="col-auto">
+                    <button class="btn btn-primary" type="submit">쓰기</button>
+                </div>
+            </form>
+
+            <ul>
+                <li>
+                    <div>
+                        <time><small>2023-05-23</small></time>
+                        <strong>pleed</strong>
+                        <p>
+                            lorem impsum dolor sit amet, consectetur a
+                            lorem impsum dolor sit amet, consectetur a
+                        </p>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <time><small>2023-05-23</small></time>
+                        <strong>pleed</strong>
+                        <p>
+                            lorem impsum dolor sit amet, consectetur a
+                            lorem impsum dolor sit amet, consectetur a
+                        </p>
+                    </div>
+                </li>
+
+            </ul>
+        </section>
+    </div>
+    <nav aria-label="Pagination button for next or previous article">
+        <ul class="pagination">
+            <li class="page-item"><a class="page-link" href="#">이전 글</a></li>
+            <li class="page-item"><a class="page-link" href="#">다음 글</a></li>
+        </ul>
+    </nav>
+    </article>
+</main>
+<footer id="footer">
+
+</footer>
+<script id="bootstrap-script"></script>
+</body>
+</html>
