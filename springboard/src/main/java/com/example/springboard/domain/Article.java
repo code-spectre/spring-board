@@ -1,5 +1,7 @@
 package com.example.springboard.domain;
 
+import com.example.springboard.dto.ArticleDto;
+import com.example.springboard.dto.UpdateArticleDto;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -13,13 +15,13 @@ import java.util.Set;
 @Getter
 @ToString
 @Table(
-        name="article",
+        name = "article",
         indexes = {
-        @Index(columnList="title"),
-        @Index(columnList="hashtag"),
-        @Index(columnList="createdAt"),
-        @Index(columnList="createdBy"),
-})
+                @Index(columnList = "title"),
+                @Index(columnList = "hashtag"),
+                @Index(columnList = "createdAt"),
+                @Index(columnList = "createdBy"),
+        })
 @EntityListeners(AuditingEntityListener.class)
 @Entity
 public class Article extends AuditingFields {
@@ -50,6 +52,20 @@ public class Article extends AuditingFields {
 
     public static Article of(String title, String content, String hashtag) {
         return new Article(title, content, hashtag);
+    }
+
+    public static Article of(ArticleDto dto) {
+        return new Article(dto.title(), dto.content(), dto.hashtag());
+    }
+
+    public static Article of(UpdateArticleDto dto) {
+        Article article = new Article(
+                dto.title(),
+                dto.content(),
+                dto.hashtag()
+        );
+        article.id = dto.id();
+        return article;
     }
 
     @Override
