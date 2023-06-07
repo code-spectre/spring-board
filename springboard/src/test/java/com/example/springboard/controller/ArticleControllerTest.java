@@ -5,7 +5,6 @@ import com.example.springboard.service.ArticleService;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -13,8 +12,6 @@ import org.springframework.context.annotation.Import;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -22,7 +19,6 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 // 모든 controller를 테스트 할 필요는 없으므로
@@ -31,10 +27,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @DisplayName("View 컨트롤러 - 게시글")
 class ArticleControllerTest {
     private final MockMvc mvc;
-    @MockBean private ArticleService articleService;
+    @MockBean
+    private ArticleService articleService;
 
     // spring 코드에서는 꼭 autowired를 안해도 되지만 testing 코드에서는 반드시 autowired를 해서 의존성 주입을 해줘야 한다.
-    public ArticleControllerTest(@Autowired MockMvc mvc){
+    public ArticleControllerTest(@Autowired MockMvc mvc) {
         this.mvc = mvc;
     }
 
@@ -58,8 +55,9 @@ class ArticleControllerTest {
 
     @DisplayName("[view] GET 게시글 단 건 호출 - 정상 호출")
     @Test
-    public void givenNothing_whenRequestingArticleView_thenReturnsArticleView() throws Exception {
+    public void givenArticleId_whenRequestingArticleView_thenReturnsArticleView() throws Exception {
         // given
+
         // when
         mvc.perform(get("/articles/1"))
                 .andExpect(status().isOk())

@@ -5,4 +5,16 @@
     <attr sel="#bootstrap-viewport" th:replace="index :: #bootstrap-viewport"/>
     <attr sel="#bootstrap-link" th:replace="index :: #bootstrap-link"/>
     <attr sel="#boostrap-script" th:replace="index :: #bootstrap-script"/>
+
+    <attr sel="#articles">
+        <attr sel="tbody" th:remove="all-but-first">
+            <attr sel="tr[0]" th:each="article : ${articles}">
+                <attr sel="td.title/a" th:text="${article.title}" th:href="@{articles/${article.id}"/>
+                <attr sel="td.hashtag" th:text="${article.hashtag}"/>
+                <attr sel="td.created-by" th:text="${article.nickname}"/>
+                <attr sel="td.created-at" th:datetime="${article.createdAt}"
+                      th:text="${#temporals.format(article.createdAt, 'yyyy-MM-dd')}"/>
+            </attr>
+        </attr>
+    </attr>
 </thlogic>

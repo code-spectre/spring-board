@@ -1,7 +1,7 @@
 package com.example.springboard.controller;
 
-import com.example.springboard.domain.Article;
 import com.example.springboard.dto.article.ArticleDto;
+import com.example.springboard.dto.article.ArticleWithCommentsDto;
 import com.example.springboard.service.ArticleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -20,6 +20,7 @@ import java.util.List;
 public class ArticleController {
 
     private final ArticleService articleService;
+
     @GetMapping
     public String articles(ModelMap map) {
         map.addAttribute("articles", List.of());
@@ -29,8 +30,9 @@ public class ArticleController {
 
     @GetMapping("/{articleId}")
     public String article(@PathVariable Long articleId, ModelMap map) {
-        map.addAttribute("article",  "article");
-        map.addAttribute("articleComments",  List.of());
+        ArticleWithCommentsDto article = articleService.getArticle(articleId);
+        map.addAttribute("article", article);
+        map.addAttribute("articleComments", article.articleCommentsDto());
         return "articles/detail";
     }
 }

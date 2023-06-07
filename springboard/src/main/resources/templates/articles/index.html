@@ -65,48 +65,48 @@
     <!--        <input id="search-value" type="search" placeholder="검색어..." name="search-value"/>-->
     <!--        <button type="submit">검색</button>-->
     <!--    </form>-->
-        <table class="table">
-            <thead>
-            <tr>
-                <th class="col-6">제목</th>
-                <th class="col-2">해시태그</th>
-                <th class="col-2">작성자</th>
-                <th class="col-2">작성일</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>첫글</td>
-                <td>#java</td>
-                <td>pleed</td>
-                <td>2023-05-23</td>
-            </tr>
-            <tr>
-                <td>두번째글</td>
-                <td>#spring</td>
-                <td>pleed</td>
-                <td>2023-05-23</td>
-            </tr>
-            <tr>
-                <td>세번째글</td>
-                <td>#rust</td>
-                <td>pleed</td>
-                <td>2023-05-23</td>
-            </tr>
+    <table class="table" id="articles">
+        <thead>
+        <tr>
+            <th class="title col-6">제목</th>
+            <th class="hashtag col-2">해시태그</th>
+            <th class="created-by col-2">작성자</th>
+            <th class="created-at col-2">작성일</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td class="title"><a>첫글</a></td>
+            <td class="hashtag">#java</td>
+            <td class="created-by">pleed</td>
+            <td class="created-at">2023-05-23</td>
+        </tr>
+        <tr>
+            <td>두번째글</td>
+            <td>#spring</td>
+            <td>pleed</td>
+            <td>2023-05-23</td>
+        </tr>
+        <tr>
+            <td>세번째글</td>
+            <td>#rust</td>
+            <td>pleed</td>
+            <td>2023-05-23</td>
+        </tr>
 
-            </tbody>
+        </tbody>
 
 
-        </table>
+    </table>
     <nav aria-label="article pagination buttons">
-            <ul class="pagination justify-content-center">
-                <li class="page-item"><a href="#" class="page-link">previous</a></li>
-                <li class="page-item"><a href="#" class="page-link">1</a></li>
-                <li class="page-item"><a href="#" class="page-link">2</a></li>
-                <li class="page-item"><a href="#" class="page-link">3</a></li>
-                <li class="page-item"><a href="#" class="page-link">4</a></li>
-                <li class="page-item"><a href="#" class="page-link">next</a></li>
-            </ul>
+        <ul class="pagination justify-content-center">
+            <li class="page-item"><a href="#" class="page-link">previous</a></li>
+            <li class="page-item"><a href="#" class="page-link">1</a></li>
+            <li class="page-item"><a href="#" class="page-link">2</a></li>
+            <li class="page-item"><a href="#" class="page-link">3</a></li>
+            <li class="page-item"><a href="#" class="page-link">4</a></li>
+            <li class="page-item"><a href="#" class="page-link">next</a></li>
+        </ul>
     </nav>
 
 </main>
