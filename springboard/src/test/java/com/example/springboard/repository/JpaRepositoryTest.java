@@ -2,6 +2,8 @@ package com.example.springboard.repository;
 
 import com.example.springboard.config.JpaConfig;
 import com.example.springboard.domain.Article;
+import com.example.springboard.domain.UserAccount;
+import org.apache.catalina.User;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +47,8 @@ class JpaRepositoryTest {
     void give_testdata_when_insertion_then_workfine() {
         // Given
         long previousCount = articleRepository.count();
-        Article article = Article.of("new article", "new content", "#spring");
+        UserAccount nullUser = null;
+        Article article = Article.of(nullUser, "new article", "new content", "#spring");
 
         // When
         articleRepository.save(article);

@@ -1,14 +1,26 @@
 package com.example.springboard.controller;
 
 import com.example.springboard.config.SecurityConfig;
+import com.example.springboard.service.ArticleService;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.test.web.servlet.MockMvc;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.then;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -19,9 +31,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @DisplayName("View 컨트롤러 - 게시글")
 class ArticleControllerTest {
     private final MockMvc mvc;
+    @MockBean private ArticleService articleService;
 
     // spring 코드에서는 꼭 autowired를 안해도 되지만 testing 코드에서는 반드시 autowired를 해서 의존성 주입을 해줘야 한다.
-    public ArticleControllerTest(@Autowired MockMvc mvc) {
+    public ArticleControllerTest(@Autowired MockMvc mvc){
         this.mvc = mvc;
     }
 
@@ -30,6 +43,8 @@ class ArticleControllerTest {
     @Test
     public void givenNothing_whenRequestingArticlesView_thenReturnsArticlesView() throws Exception {
         // given
+        given(articleService.searchArticles(eq(null), eq(null), any(Pageable.class)))
+                .willReturn(Page.empty());
         // when
         mvc.perform(get("/articles"))
                 .andExpect(status().isOk())
@@ -37,6 +52,7 @@ class ArticleControllerTest {
                 .andExpect(view().name("articles/index"))
                 .andExpect(model().attributeExists("articles"));
         // then
+        then(articleService).should().searchArticles(eq(null), eq(null), any(Pageable.class));
     }
 
 

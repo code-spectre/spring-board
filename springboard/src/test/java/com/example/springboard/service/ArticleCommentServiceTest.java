@@ -1,6 +1,6 @@
 package com.example.springboard.service;
 
-import com.example.springboard.dto.ArticleCommentDto;
+import com.example.springboard.dto.comment.ArticleCommentDto;
 import com.example.springboard.repository.ArticleCommentRepository;
 import com.example.springboard.repository.ArticleRepository;
 import org.junit.jupiter.api.DisplayName;

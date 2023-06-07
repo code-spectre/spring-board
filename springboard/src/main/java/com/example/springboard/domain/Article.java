@@ -1,7 +1,7 @@
 package com.example.springboard.domain;
 
-import com.example.springboard.dto.ArticleDto;
-import com.example.springboard.dto.UpdateArticleDto;
+import com.example.springboard.dto.article.ArticleDto;
+import com.example.springboard.dto.article.UpdateArticleDto;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -13,7 +13,7 @@ import java.util.Objects;
 import java.util.Set;
 
 @Getter
-@ToString
+@ToString(callSuper = true)
 @Table(
         name = "article",
         indexes = {
@@ -37,35 +37,27 @@ public class Article extends AuditingFields {
     private String hashtag;
 
     @OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
+    @OrderBy("createdAt DESC")
     @ToString.Exclude
     private final Set<ArticleComment> articleComments = new LinkedHashSet<>();
+
+    @Setter
+    @ManyToOne(optional = false)
+    private UserAccount userAccount;
 
 
     protected Article() {
     }
 
-    private Article(String title, String content, String hashtag) {
+    private Article(UserAccount userAccount, String title, String content, String hashtag) {
+        this.userAccount = userAccount;
         this.title = title;
         this.content = content;
         this.hashtag = hashtag;
     }
 
-    public static Article of(String title, String content, String hashtag) {
-        return new Article(title, content, hashtag);
-    }
-
-    public static Article of(ArticleDto dto) {
-        return new Article(dto.title(), dto.content(), dto.hashtag());
-    }
-
-    public static Article of(UpdateArticleDto dto) {
-        Article article = new Article(
-                dto.title(),
-                dto.content(),
-                dto.hashtag()
-        );
-        article.id = dto.id();
-        return article;
+    public static Article of(UserAccount userAccount, String title, String content, String hashtag) {
+        return new Article(userAccount, title, content, hashtag);
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.example.springboard.dto;
+package com.example.springboard.dto.article;
 
 public record UpdateArticleDto(
         Long id,
