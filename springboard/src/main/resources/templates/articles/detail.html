@@ -8,24 +8,23 @@
 </head>
 <body>
 <header id="header"></header>
-<main class="container">
-    <header class="py-5 text-center">
+<main id="article-main" class="container">
+    <header id="article-header" class="py-5 text-center">
         <h1>첫번째 글</h1>
     </header>
     <div class="row g-5">
         <section class="col-md-5 col-lg-4 order-md-last">
             <aside>
-                <p><span class="nick-name">pleed</span></p>
-                <p><a class="u-url" rel="me" href="mailto:pleed@naver.com">pleed</a></p>
+                <p><span id="nickname">pleed</span></p>
+                <p><a id="email" class="u-url" rel="me" href="mailto:pleed@naver.com">pleed</a></p>
                 <p>
-                    <time datetime="2023-05-23T00:00:00">2023-05-23</time>
+                    <time id="created-at" datetime="2023-05-23T00:00:00">2023-05-23</time>
                 </p>
-                <p><span class="nick-name">pleed</span></p>
-                <p>#java</p>
+                <p id="hashtag">#java</p>
             </aside>
         </section>
-        <article class="col-md-7 col-lg-8">
-            <p>본문<br/><br/></p>
+        <article id="article-content" class="col-md-7 col-lg-8">
+            <pre>본문<br/><br/></pre>
         </article>
     </div>
 
@@ -41,28 +40,28 @@
                 </div>
             </form>
 
-            <ul>
-                <li>
-                    <div>
-                        <time><small>2023-05-23</small></time>
-                        <strong>pleed</strong>
-                        <p>
-                            lorem impsum dolor sit amet, consectetur a
-                            lorem impsum dolor sit amet, consectetur a
-                        </p>
-                    </div>
-                </li>
-                <li>
-                    <div>
-                        <time><small>2023-05-23</small></time>
-                        <strong>pleed</strong>
-                        <p>
-                            lorem impsum dolor sit amet, consectetur a
-                            lorem impsum dolor sit amet, consectetur a
-                        </p>
-                    </div>
-                </li>
+            <ul id="comments">
 
+                <li>
+                    <div>
+                        <time><small>2023-05-23</small></time>
+                        <strong>pleed</strong>
+                        <p>
+                            lorem impsum dolor sit amet, consectetur a
+                            lorem impsum dolor sit amet, consectetur a
+                        </p>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <time><small>2023-05-23</small></time>
+                        <strong>pleed</strong>
+                        <p>
+                            lorem impsum dolor sit amet, consectetur a
+                            lorem impsum dolor sit amet, consectetur a
+                        </p>
+                    </div>
+                </li>
             </ul>
         </section>
     </div>
