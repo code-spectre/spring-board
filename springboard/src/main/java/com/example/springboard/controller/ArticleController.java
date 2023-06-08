@@ -4,6 +4,7 @@ import com.example.springboard.domain.type.SearchType;
 import com.example.springboard.dto.article.ArticleDto;
 import com.example.springboard.dto.article.ArticleResponse;
 import com.example.springboard.dto.article.ArticleWithCommentsDto;
+import com.example.springboard.dto.article.ArticleWithCommentsResponse;
 import com.example.springboard.service.ArticleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -40,9 +41,9 @@ public class ArticleController {
 
     @GetMapping("/{articleId}")
     public String article(@PathVariable Long articleId, ModelMap map) {
-        ArticleWithCommentsDto article = articleService.getArticle(articleId);
+        ArticleWithCommentsResponse article = ArticleWithCommentsResponse.from(articleService.getArticle(articleId));
         map.addAttribute("article", article);
-        map.addAttribute("articleComments", article.articleCommentsDto());
+        map.addAttribute("articleComments", article.articleCommentResponses());
         return "articles/detail";
     }
 }
