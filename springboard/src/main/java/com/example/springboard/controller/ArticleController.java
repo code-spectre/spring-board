@@ -6,6 +6,7 @@ import com.example.springboard.dto.article.ArticleResponse;
 import com.example.springboard.dto.article.ArticleWithCommentsDto;
 import com.example.springboard.dto.article.ArticleWithCommentsResponse;
 import com.example.springboard.service.ArticleService;
+import com.example.springboard.service.PaginationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -26,6 +27,7 @@ import java.util.List;
 public class ArticleController {
 
     private final ArticleService articleService;
+    private final PaginationService paginationService;
 
     @GetMapping
     public String articles(
@@ -35,7 +37,10 @@ public class ArticleController {
             ModelMap map) {
         Page<ArticleResponse> articles =
                 articleService.searchArticles(searchType, searchTerm, pageable).map(ArticleResponse::from);
+        List<Integer> barNumbers = paginationService.getPaginationBarNumbers(pageable.getPageNumber(),
+                articles.getTotalPages());
         map.addAttribute("articles", articles);
+        map.addAttribute("paginationBarNumbers", barNumbers);
         return "articles/index";
     }
 

@@ -16,5 +16,29 @@
                       th:text="${#temporals.format(article.createdAt, 'yyyy-MM-dd')}"/>
             </attr>
         </attr>
+
+    </attr>
+    <attr sel="#pagination">
+        <attr sel="ul">
+            <attr sel="li[0]/a"
+                  th:text="Prev"
+                  th:href="@{/articles(page=${articles.number - 1}, searchType=${param.searchType}, searchTerm=${param.searchTerm})}"
+                  th:class="'page-link'+(${articles.number} <= 0 ? ' disabled' : '')"
+            />
+            <attr sel="li[1]" th:each="page: ${paginationBarNumbers}">
+                <attr sel="a"
+                      th:text="${page+1}"
+                      th:href="@{/articles(page=${page}, searchType=${param.searchType}, searchTerm=${param.searchTerm})}"
+                      th:class="'page-link'+(${page} == ${articles.number} ? ' disabled' : '')"
+                />
+            </attr>
+            <attr sel="li[2]/a"
+                  th:text="Next"
+                  th:href="@{/articles(page=${articles.number + 1}, searchType=${param.searchType}, searchTerm=${param.searchTerm})}"
+                  th:class="'page-link'+(${articles.number} >= ${articles.totalPages} ? ' disabled' : '')"
+            />
+
+
+        </attr>
     </attr>
 </thlogic>
