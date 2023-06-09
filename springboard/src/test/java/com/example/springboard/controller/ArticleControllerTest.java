@@ -1,6 +1,7 @@
 package com.example.springboard.controller;
 
 import com.example.springboard.config.SecurityConfig;
+import com.example.springboard.domain.type.SearchType;
 import com.example.springboard.service.ArticleService;
 import com.example.springboard.service.PaginationService;
 import org.junit.jupiter.api.Disabled;
@@ -32,7 +33,8 @@ class ArticleControllerTest {
     @MockBean
     private ArticleService articleService;
 
-    @MockBean private PaginationService paginationService;
+    @MockBean
+    private PaginationService paginationService;
 
     // spring 코드에서는 꼭 autowired를 안해도 되지만 testing 코드에서는 반드시 autowired를 해서 의존성 주입을 해줘야 한다.
     public ArticleControllerTest(@Autowired MockMvc mvc) {
@@ -76,17 +78,29 @@ class ArticleControllerTest {
     }
 
 
-    @Disabled("구현 예정")
     @DisplayName("[view] GET - 게시글 검색 뷰 페이지 호출 - 정상 호출")
     @Test
-    public void givenNothing_whenRequestingSearchView_thenReturnsSearchView() throws Exception {
+    public void givenSearchKeyword_whenRequestingSearching_thenReturnsMatchingArticles() throws Exception {
         // given
+        SearchType searchType = SearchType.TITLE;
+        String searchTerm = "title";
+
+        given(articleService.searchArticles(eq(searchType), eq(searchTerm), any(Pageable.class))).willReturn(Page.empty());
+        given(paginationService.getPaginationBarNumbers(anyInt(), anyInt())).willReturn(List.of());
+
         // when
-        mvc.perform(get("/articles/search"))
+        mvc.perform(get("/articles")
+                        .queryParam("searchType", searchType.name())
+                        .queryParam("searchTerm", searchTerm)
+                )
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.TEXT_HTML))
-                .andExpect(model().attributeExists("articles/search"));
+                .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_HTML))
+                .andExpect(view().name("articles/index"))
+                .andExpect(model().attributeExists("articles"))
+                .andExpect(model().attributeExists("searchTypes"));
         // then
+        then(articleService).should().searchArticles(eq(searchType), eq(searchTerm), any(Pageable.class));
+        then(paginationService).should().getPaginationBarNumbers(anyInt(), anyInt());
     }
 
     @Disabled("구현 예정")
