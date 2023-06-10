@@ -45,7 +45,7 @@ public class ArticleController {
         return "articles/index";
     }
 
-    @GetMapping("/{articleId}")
+    @GetMapping("/{articleId:[0-9]+}")
     public String article(@PathVariable Long articleId, ModelMap map) {
         ArticleWithCommentsResponse article = ArticleWithCommentsResponse.from(articleService.getArticle(articleId));
         map.addAttribute("article", article);
@@ -55,7 +55,7 @@ public class ArticleController {
 
     @GetMapping("/search-hashtag")
     public String searchByHashtag(
-            @RequestParam(required = false) String hashtag,
+            @RequestParam(required = false, defaultValue = "") String hashtag,
             @PageableDefault(size=10, sort="createdAt", direction = Sort.Direction.DESC) Pageable pageable,
             ModelMap map
     ) {
