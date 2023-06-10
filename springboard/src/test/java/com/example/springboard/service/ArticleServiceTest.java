@@ -12,6 +12,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.time.LocalDateTime;
 
@@ -63,5 +64,33 @@ class ArticleServiceTest {
 
         // then
         then(articleRepository).should().deleteById(any(Long.class));
+    }
+
+    @DisplayName("해시 태그 검색에 해시태그가 없다면 빈 게시글 목록을 리턴해준다")
+    @Test
+    void givenNoHashtag_whenSearchingByHashtag_thenReturnsEmptyPages() {
+        // given
+        Pageable pageable = Pageable.ofSize(20);
+
+        // when
+        Page<ArticleDto> articles = sut.searchArticlesByHashtag(null, pageable);
+        // then
+        assertThat(articles).isEqualTo(Page.empty(pageable));
+        then(articleRepository).shouldHaveNoInteractions();
+    }
+
+    @DisplayName("해스 태그가 주어지면 해당 게시글의 페이지를 리턴해준다")
+    @Test
+    void givenHashtag_whenSearchingByHashtag_thenReturnsArticles() {
+        // given
+        String hashtag = "red";
+        Pageable pageable = Pageable.ofSize(20);
+        given(articleRepository.findByHashtag(hashtag, pageable)).willReturn(Page.empty(pageable));
+
+        // when
+        Page<ArticleDto> articles = sut.searchArticlesByHashtag(hashtag, pageable);
+
+        // then
+        then(articleRepository).should().findByHashtag(hashtag, pageable);
     }
 }
