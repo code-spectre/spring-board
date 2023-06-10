@@ -103,16 +103,22 @@ class ArticleControllerTest {
         then(paginationService).should().getPaginationBarNumbers(anyInt(), anyInt());
     }
 
-    @Disabled("구현 예정")
     @DisplayName("[view] GET - 게시글 해시태그 뷰호출 - 정상 호출")
     @Test
-    public void givenNothing_whenRequestingHashtagView_thenReturnsHashtagView() throws Exception {
+    public void givenHashtag_whenRequestingHashtagView_thenReturnsHashtagView() throws Exception {
         // given
+        String hashtag = "java";
+        given(articleService.searchArticlesByHashtag(eq(hashtag), any(Pageable.class))).willReturn(Page.empty());
         // when
-        mvc.perform(get("/articles/search-hashtag"))
+        mvc.perform(get("/articles/search-hashtag").queryParam("hashtag", hashtag))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.TEXT_HTML))
-                .andExpect(model().attributeExists("articles/search-hashtag"));
+                .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_HTML))
+                .andExpect(view().name("articles/search-hashtag"))
+                .andExpect(model().attributeExists("articles"))
+                .andExpect(model().attributeExists("hashtags"))
+                .andExpect(model().attributeExists("paginationBarNumbers"))
+                .andExpect(model().attributeExists("searchTypes"));
         // then
+        then(articleService).should().searchArticlesByHashtag(eq(hashtag), any(Pageable.class));
     }
 }
